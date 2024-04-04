@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .card {
+        width: 400px;
+        height: 400px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .preview {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.5s;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .card:hover .preview {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <iframe src="https://tailwindcss.com/showcase" class="preview"></iframe>
+    </div>
+
+    <script>
+      let scrollInterval;
+
+      document
+        .querySelector(".card")
+        .addEventListener("mouseover", function () {
+          let scrollPosition = 0;
+          scrollInterval = setInterval(function () {
+            document
+              .querySelector(".preview")
+              .contentWindow.scrollTo(0, scrollPosition);
+            scrollPosition += 50; // Augmentez cette valeur pour un défilement plus rapide
+          }, 100);
+        });
+
+      document.querySelector(".card").addEventListener("mouseout", function () {
+        clearInterval(scrollInterval);
+      });
+    </script>
+  </body>
+</html>
